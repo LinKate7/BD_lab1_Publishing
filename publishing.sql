@@ -1,5 +1,9 @@
+DROP DATABASE IF EXISTS publishing;
+CREATE DATABASE publishing;
+USE publishing;
+
 CREATE TABLE `users` (
-  `id` integer PRIMARY KEY,
+  `id` integer PRIMARY KEY AUTO_INCREMENT,
   `username` varchar(255),
   `first_name` varchar(255),
   `last_name` varchar(255),
@@ -8,13 +12,13 @@ CREATE TABLE `users` (
 );
 
 CREATE TABLE `genres` (
-  `id` integer PRIMARY KEY,
+  `id` integer PRIMARY KEY AUTO_INCREMENT,
   `name` varchar(255),
   `is_deleted` boolean DEFAULT false
 );
 
 CREATE TABLE `authors` (
-  `id` integer PRIMARY KEY,
+  `id` integer PRIMARY KEY AUTO_INCREMENT,
   `first_name` varchar(255),
   `last_name` varchar(255),
   `date_of_birth` date,
@@ -28,12 +32,13 @@ CREATE TABLE `authors` (
 );
 
 CREATE TABLE `books` (
-  `id` integer PRIMARY KEY,
+  `id` integer PRIMARY KEY AUTO_INCREMENT,
   `title` varchar(255),
   `isbn` varchar(255),
   `genre_id` integer,
   `publish_date` date,
   `number_of_pages` integer,
+  `rating` integer,
   `language_id` integer,
   `publisher_id` integer,
   `format_id` integer,
@@ -45,7 +50,7 @@ CREATE TABLE `books` (
 );
 
 CREATE TABLE `publishers` (
-  `id` integer PRIMARY KEY,
+  `id` integer PRIMARY KEY AUTO_INCREMENT,
   `name` varchar(255),
   `address` varchar(255),
   `city` varchar(255),
@@ -58,13 +63,13 @@ CREATE TABLE `publishers` (
 );
 
 CREATE TABLE `languages` (
-  `id` integer PRIMARY KEY,
+  `id` integer PRIMARY KEY AUTO_INCREMENT,
   `name` varchar(255),
   `code` varchar(255)
 );
 
 CREATE TABLE `book_authors` (
-  `id` integer PRIMARY KEY,
+  `id` integer PRIMARY KEY AUTO_INCREMENT,
   `book_id` integer,
   `author_id` integer,
   `contribution_type` varchar(255),
@@ -72,7 +77,7 @@ CREATE TABLE `book_authors` (
 );
 
 CREATE TABLE `book_editors` (
-  `id` integer PRIMARY KEY,
+  `id` integer PRIMARY KEY AUTO_INCREMENT,
   `book_id` integer,
   `editor_id` integer,
   `contribution_type` varchar(255),
@@ -80,7 +85,7 @@ CREATE TABLE `book_editors` (
 );
 
 CREATE TABLE `editors` (
-  `id` integer PRIMARY KEY,
+  `id` integer PRIMARY KEY AUTO_INCREMENT,
   `first_name` varchar(255),
   `last_name` varchar(255),
   `email` varchar(255),
@@ -92,7 +97,7 @@ CREATE TABLE `editors` (
 );
 
 CREATE TABLE `reviews` (
-  `id` integer PRIMARY KEY,
+  `id` integer PRIMARY KEY AUTO_INCREMENT,
   `book_id` integer,
   `reviewer_id` integer,
   `rating` integer,
@@ -102,7 +107,7 @@ CREATE TABLE `reviews` (
 );
 
 CREATE TABLE `reviewers` (
-  `id` integer PRIMARY KEY,
+  `id` integer PRIMARY KEY AUTO_INCREMENT,
   `first_name` varchar(255),
   `last_name` varchar(255),
   `email` varchar(255),
@@ -110,7 +115,7 @@ CREATE TABLE `reviewers` (
 );
 
 CREATE TABLE `stores` (
-  `id` integer PRIMARY KEY,
+  `id` integer PRIMARY KEY AUTO_INCREMENT,
   `name` varchar(255),
   `address` varchar(255),
   `city` varchar(255),
@@ -124,7 +129,7 @@ CREATE TABLE `stores` (
 );
 
 CREATE TABLE `book_stores` (
-  `id` integer PRIMARY KEY,
+  `id` integer PRIMARY KEY AUTO_INCREMENT,
   `store_id` integer,
   `book_id` integer,
   `stock_quantity` integer,
@@ -132,7 +137,7 @@ CREATE TABLE `book_stores` (
 );
 
 CREATE TABLE `orders` (
-  `id` integer PRIMARY KEY,
+  `id` integer PRIMARY KEY AUTO_INCREMENT,
   `customer_id` integer,
   `order_date` date,
   `total_amount` numeric,
@@ -142,7 +147,7 @@ CREATE TABLE `orders` (
 );
 
 CREATE TABLE `customers` (
-  `id` integer PRIMARY KEY,
+  `id` integer PRIMARY KEY AUTO_INCREMENT,
   `first_name` varchar(255),
   `last_name` varchar(255),
   `email` varchar(255),
@@ -156,7 +161,7 @@ CREATE TABLE `customers` (
 );
 
 CREATE TABLE `order_details` (
-  `id` integer PRIMARY KEY,
+  `id` integer PRIMARY KEY AUTO_INCREMENT,
   `order_id` integer,
   `book_id` integer,
   `quantity` integer,
@@ -164,7 +169,7 @@ CREATE TABLE `order_details` (
 );
 
 CREATE TABLE `royalties` (
-  `id` integer PRIMARY KEY,
+  `id` integer PRIMARY KEY AUTO_INCREMENT,
   `author_id` integer,
   `book_id` integer,
   `royalty_percentage` decimal,
@@ -175,7 +180,7 @@ CREATE TABLE `royalties` (
 );
 
 CREATE TABLE `promotions` (
-  `id` integer PRIMARY KEY,
+  `id` integer PRIMARY KEY AUTO_INCREMENT,
   `book_id` integer,
   `start_date` date,
   `end_date` date,
@@ -186,7 +191,7 @@ CREATE TABLE `promotions` (
 );
 
 CREATE TABLE `contracts` (
-  `id` integer PRIMARY KEY,
+  `id` integer PRIMARY KEY AUTO_INCREMENT,
   `author_id` integer,
   `book_id` integer,
   `contract_date` date,
@@ -197,7 +202,7 @@ CREATE TABLE `contracts` (
 );
 
 CREATE TABLE `formats` (
-  `id` integer PRIMARY KEY,
+  `id` integer PRIMARY KEY AUTO_INCREMENT,
   `name` varchar(255),
   `is_deleted` boolean DEFAULT false
 );
